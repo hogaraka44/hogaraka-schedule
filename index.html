@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>進捗管理サイト</title>
+    </head>
+   
+<body>
+    <style>
+        .left{
+            float: left;
+            padding: 20px
+        }
+    </style>
+    <div class="left">
+        <div>
+            <input type="range" max="10" id="volumeSlider"/>
+            <label>進捗度</label>
+            <input type="checkbox" id = checkButton>
+            <input style="width: 4em; "type="number" id="volumeText">
+            <p>/10</p>
+
+        </div>
+    </div>    
+
+<script>
+    
+    //参考
+    // https://1-notes.com/javascript-slider-range-event/
+
+    let volumeSlider = document.getElementById('volumeSlider');
+    volumeSlider.value = "0";
+
+    let volumeText = document.getElementById('volumeText');
+    volumeText.value = volumeSlider.value;
+
+    let checkBox = document.getElementById('checkButton');
+    
+    volumeSlider.addEventListener('input',SliderInput)
+    
+    //スライダー系
+    function SliderInput(){
+      //console.log('ボリュームは ' + volumeSlider.value + ' です');
+      volumeText.value = volumeSlider.value;
+      checkBox.checked = false; 
+    }
+
+    //テキスト系
+    volumeText.addEventListener('input',inputNum)
+    function inputNum(){
+        volumeText.value= Math.min(10,volumeText.value)
+        volumeText.value= Math.max(0,volumeText.value)
+
+        volumeSlider.value = volumeText.value; 
+        checkBox.checked = false
+    }
+    
+    //クリック系
+    checkBox.addEventListener('click',checked)
+    function checked()
+    {   
+        document.cookie =10;//toString( volumeText.value);
+        if (checkBox.checked){
+        nownum = volumeText.value
+        volumeText.value = 10;
+        volumeSlider.value = volumeText.value;
+        alert(document.cookie);
+        }
+        else
+        {
+        volumeText.value = nownum;
+        volumeSlider.value = volumeText.value;
+        }
+    }
+    
+    
+</script>
+
+</body>
+</html>
+
