@@ -58,18 +58,21 @@
     checkBox.addEventListener('click',checked)
     function checked()
     {   
-        document.cookie =10;//toString( volumeText.value);
         if (checkBox.checked){
         nownum = volumeText.value
         volumeText.value = 10;
         volumeSlider.value = volumeText.value;
+
+        document.cookie = volumeText.value;
         alert(document.cookie);
         }
         else
         {
         volumeText.value = nownum;
         volumeSlider.value = volumeText.value;
+
         document.cookie = volumeText.value;
+        alert(document.cookie);
         }
     }
     
